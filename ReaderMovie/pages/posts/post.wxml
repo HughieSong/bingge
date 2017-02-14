@@ -1,0 +1,23 @@
+<!--template引用可以是相对路径也可以是绝对路径-->
+<import src="post-item/post-item-template.wxml"/>
+<!--<import src="/pages/posts/post-item/post-item-template.wxml"/>-->
+<view>
+  <swiper catchtap="onSwiperTap" vertical="{{false}}" indicator-dots="true" autoplay="true" interval="5000">
+    <swiper-item>
+    <!--在swiper标签中已经添加catchtap事件后，再在image标签中绑定bindtap仍然有效，而再加catchtap无效，原因在于bindtap不会阻止冒泡，catchtap相反-->
+      <image src="/images/wx.png" data-postId="3"></image>
+    </swiper-item>
+    <swiper-item>
+      <image src="/images/vr.png" data-postId="4"></image>
+    </swiper-item>
+    <swiper-item>
+      <image src="/images/iqiyi.png" data-postId="5"></image>
+    </swiper-item>
+  </swiper>
+  <block wx:for="{{posts_key}}" wx:for-item="item">
+  <!--template-->
+  <view catchtap="onPostTap" data-postId="{{item.postId}}" data-post-name="name">
+    <template is="postItem" data="{{...item}}"/>
+  </view>
+  </block>
+</view>

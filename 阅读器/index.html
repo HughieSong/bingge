@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,minimal-ui">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="css/reset.css">
+    <style type="text/css">
+        html {
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden;
+        }
+
+        body {
+            text-align: left;
+            width: 100%;
+            overflow: hidden;
+            background: #e9dfc7;
+        }
+
+        .m-read-content {
+            font-size: 14px;
+            color: #555;
+            line-height: 31px;
+            padding: 15px;
+        }
+
+        .m-read-content h4 {
+            font-size: 20px;
+            color: #736357;
+            border-bottom: 1px solid #736357;
+            letter-spacing: 2px;
+            margin:0 0 1em 0;
+        }
+
+        .m-read-content p {
+            text-indent: 2em;
+            margin: 0.5em 0;
+            letter-spacing: 0;
+            line-height: 24px;
+        }
+
+        .u-tab {
+            height: 34px;
+            margin: 10px auto;
+            line-height: 34px;
+            border-radius: 8px;
+            border: 1px solid #858382;
+            font-size: 12px;
+            background: #000;
+            opacity: 0.9;
+        }
+
+        .u-tab li {
+            display: inline-block;
+            width: 49%;
+            border-right: 1px solid #858382;
+            text-align: center;
+            color: #fff;
+        }
+
+        .u-tab li:nth-child(2) {
+            border-right: none;
+        }
+
+        .m-button-bar {
+            width: 70%;
+            max-width: 800px;
+            padding: 5px;
+            margin: 0 auto;
+        }
+
+        .top-nav {
+            position: fixed;
+            top: 0;
+            height: 50px;
+            width: 100%;
+            z-index: 9999;
+            background: #000;
+        }
+
+        .icon-back {
+            position: absolute;
+            top: 14px;
+            left: 10px;
+            width: 23px;
+            height: 23px;
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAYAAACOEfKtAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyNpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChNYWNpbnRvc2gpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkJGMkEyQkQxMjdBNDExRTU4NjA2QTJDMjFDQ0I0ODhEIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkJGMkEyQkQyMjdBNDExRTU4NjA2QTJDMjFDQ0I0ODhEIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6QkYyQTJCQ0YyN0E0MTFFNTg2MDZBMkMyMUNDQjQ4OEQiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6QkYyQTJCRDAyN0E0MTFFNTg2MDZBMkMyMUNDQjQ4OEQiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz4Ia560AAAHWklEQVR42uyd7W9U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);
+            /*base64格式的图片还可以用iconfont或纯CSS3实现*/
+            background-size: contain;
+            /*先设置background图片在设置background-size：contain才能生效，contain自适应容器的宽度和高度*/
+        }
+
+        .nav-title {
+            position: absolute;
+            top: 16px;
+            left: 42px;
+            color: #d5d5d6;
+        }
+
+        .bottom-nav-bk {
+            position: fixed;
+            bottom: 0px;
+            height: 70px;
+            width: 100%;
+            z-index: 10000;
+            background: #000;
+            opacity: 0.9;
+        }
+
+        .bottom-nav-bk > div {
+            display: inline-block;
+            width: 33.3%;
+            height: 70px;
+            float: left;
+            margin: 10px 0 0 0;
+        }
+
+        .contents, .font, .current, .day, .night {
+            width: 23px;
+            height: 23px;
+            margin: 5px auto;
+        }
+
+        .char {
+            width: 100%;
+            /*margin: 0 auto;*/
+            text-align: center;
+            color: #fff;
+        }
+
+        .contents {
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADUAAAAoCAYAAABerrI1AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyNpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChNYWNpbnRvc2gpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkNFN0E3M0IwMjc4NDExRTU5RkYxQjg1Rjk2QkEyNzBEIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkNFN0E3M0IxMjc4NDExRTU5RkYxQjg1Rjk2QkEyNzBEIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6N0M1ODVCRkYyNzg0MTFFNTlGRjFCODVGOTZCQTI3MEQiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6N0M1ODVDMDAyNzg0MTFFNTlGRjFCODVGOTZCQTI3MEQiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz5uTX6PAAAA0UlEQVR42uyXsQrCMBRFX4p0V39Pv8FJcekHFJe6d+v3NY6CDvUFooQ0AcEllnPhlgz3QU6bBq6ZnvdaRC7qndqoB/VR/ZC5wuxGytLtvXejUJ0uDlGgVZ8Tg6lsaWod1Jh461a9TQyMBX6hWLaSBary5zBWn8kPf8DUr/Rx8hfEPth4kxkIs+tCL4rG/VOLPH5AAQUUUEABBRRQv0O54nf1tcL6dZ3Jh9mpMH/2TkmkJFISKYmURKCAAgoooIACCihKIiWRkkhJpCR+XxJfAgwA/ROhOlYvoWQAAAAASUVORK5CYII=
+            ) no-repeat;
+            background-size: contain;
+        }
+
+        .font {
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEYAAAAuCAYAAACViW+zAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyNpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChNYWNpbnRvc2gpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjBCRTkzQUQ3Mjc4NzExRTU5RkYxQjg1Rjk2QkEyNzBEIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjBCRTkzQUQ4Mjc4NzExRTU5RkYxQjg1Rjk2QkEyNzBEIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6Q0U3QTczQkEyNzg0MTFFNTlGRjFCODVGOTZCQTI3MEQiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MEJFOTNBRDYyNzg3MTFFNTlGRjFCODVGOTZCQTI3MEQiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz6/hjRDAAAFqklEQVR42uRaaWwVVRi9fTbYqoBoEGIVrDsBA6JRAY0VSkQUl7pQI8YQGjTRaNCgBtdoApho3aoRRJaIC25/VBTBCiqCuKX+QDFqFANRsRCtsRWr9XzxNBnu++6bO/fNe9i+k5y0c2fmzrwz3/22mbKuv9pNChgCLgLHgBvABnCr6Qkor1CHy1ISZjVYG9leC55V6sLsB/4ucynj7T1VmEwKU09VRBHUmx6MNIS5JuF4SQhzIniKY5+MjypVYa4OtKb/PfJxvn3B7eABOY4Rp3wo2FZKzndajCiG+68otaWkLaP23rKcQoWRDHekMj5DGZPjTisVYWYqY+vB5/g3qZPuFcIMYFJn4wnrr50EDujtwlwFVlpjreBL/P9lbkdRyfMKBcmn7gRfAbeAO8G/wS7yT3Ab+AHYBF4I7ptmuJbUfzN4vDXeCN4U2X4AvNE65gtwOG80rYc6ndcdFnD+DnAe+ChCdme+wpzJyjmKLgr1VWTsOAph11A14LoURBkKrgBPTWGu98CLIE5rPktJC73NliiG5vxOgUK3WN3GlEQRnAG+Zjo7+oQKMxCsU8YXOI7XnHAd5wnFQeAb4GBl37fgXeDp4CGS09Jiy+hPxMoud0RNSSduDV1Kt4DzrbEfecHdyvHyBKSLN8galxu4L1CYp5lxRyGO9WbwcbDT00/OtYVg2VKFJdWWxGIyjtxliUMUw/HFjhwoJBqOVMoLuca54COeonT7xDmMUHbtV5d0KU0Ej7TG/gEXxpy3kMdFIfPUBghzneLMJUS/HTCXiPOYMl6bVBgtc30T/C7mPNm/KgUnvA94iTX2Cy0lFO87rNJbmCpwiqdz9XXCUzivLyqZK21g4tadSObTU96q5FSHJxFmBj18FD8wOvhgJY/fowviKDhz9XXuBccy4kg/eWkKofo3a/tAX2HkBzQo44sSODs57illvEER3Ac7mdxtTEGY/UNrpXOi5hXzQ3NBE1LmnbyXasSTafHlocJoTvJVFmRJsI3n7a12xCD6tfnM0j8CJ4UWkUeA3yjinQ2+FXBzkxS/JKH8KI/o5oP+4LHgMWA177+a20O8ZymvKDMxa9yViK1Kue0xkwlXyLmy1M/jw6pO08RcFiPp/PeOmiRt5CorcvWEbgePDrzmbpYld7gsxiXMpeALRXSGl4Evei6XpWw0JcEf7CN9Bn4Ivs4H0pVUmDXghCIK0+xxvT70UeMd+yXx+5RhfDOrbXH68u5rV47SwFsYcWBfFrDJVKP0arRmlw2tKyj4GnwYfJY5TtKaSRUm4wihtigi1LspWcc6zme3AnKFbnGs1yo/ai4bV00BogyM8+xRVBi9ab3ApNer7XI0t7Qmezemm+zm9f3gbQmddhQnJBFGKtiDrTFZa8tS9inLlAJQrnux4/gJSu10T573MD6JMFqmuyKH8wrFLkfUc7Ujhlvbn1Cc4DTF6O/GVGFGgOMczaZCQFtO4xQTzzBM21acD+rjcqBMzNNqYQ+kEJB5P/eon6RssD8jGWb0z9t8cBj4oE9aLZDPNaZ5PtU0oTWxtM9LWqxtyZTPD7ievO9abbIb9JHeQUcmKsxUxVxlDS8vsDDLFV/R32R/2LhSOfdJ4/8VhfRdZoEfmz3fomoRbXBUGG0ZPWMK/yVUGxOzuOW0mGm9nYes531eQCvqXl7lrNrr2QuSNmajZYm/gjco1x7RnfkOdZT9o1lbFBqjGWW0pC56X9czw42DtCv7xvig7VyKP5vsL9gfQvY7Syymw2S/4thUJFEM65tNisO1I4+8EZjnkWj2ixFFLHQUH4b0ordY+6+En+knwvzElDoaCmeb4mK2JUQT78vGHPZeWhLOL3M/D55k/ntptyOy724l0WyMFpE1jO3NrEyLDVk6E1lIrvU4fgxFGkv/UsWSQnxHK5dhC/3QGqe/dHy1+a8AAwCKR08FSRIHxQAAAABJRU5ErkJggg==
+            ) no-repeat;
+            background-size: contain;
+        }
+
+        .current {
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEwAAAA0CAYAAAAg5t6HAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyNpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChNYWNpbnRvc2gpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkNFN0E3M0I4Mjc4NDExRTU5RkYxQjg1Rjk2QkEyNzBEIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkNFN0E3M0I5Mjc4NDExRTU5RkYxQjg1Rjk2QkEyNzBEIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6Q0U3QTczQjYyNzg0MTFFNTlGRjFCODVGOTZCQTI3MEQiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6Q0U3QTczQjcyNzg0MTFFNTlGRjFCODVGOTZCQTI3MEQiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz7nhaYNAAANmElEQVR42uxbC1RV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
+            ) no-repeat;
+            background-size: contain;
+
+        }
+
+        .day {
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADkAAAA5CAYAAACMGIOFAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyNpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChNYWNpbnRvc2gpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkNFN0E3M0I0Mjc4NDExRTU5RkYxQjg1Rjk2QkEyNzBEIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkNFN0E3M0I1Mjc4NDExRTU5RkYxQjg1Rjk2QkEyNzBEIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6Q0U3QTczQjIyNzg0MTFFNTlGRjFCODVGOTZCQTI3MEQiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6Q0U3QTczQjMyNzg0MTFFNTlGRjFCODVGOTZCQTI3MEQiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz6o6V5PAAADu0lEQVR42uyaTUgVURTHm/cigiS1LEitoHoqbgtcZAStngtDoYxa9rFsYYuWfUBhuSjCneiylkH2oavoEZlC4aYsM9toakWLnpsWyfQfOMJrOvdjZs6bedQc+OF7d9499/y9M/fj3HFc110Xo3WAYfp8BozG0agTs8hFsIM+L4H6f1GkvzEnjkYz6/4DS0WmIlORSlsq+bxcKSI3gkHwBlwSGA3PkrjPNE+GnhXAZYprkOLUjOmYQjT0un/aMHAMdcqNQ3GUWq+ujqknt/i+nwZDcc1vih4cojh0cQbqyQaw4P5tSfQo14OezYNGXV0b5zly5Le+mEX2KQTmTHVtl3U58BQ0lpQtgJ2Gei2gE7SDVrANVIMf4Bt4B56Dh+C9wdc80/4RMGteTNr/J/09+lhzW3WBCTeYTVA91WPwKGgPBrldS9kFBkA/qGOuN4FnbjTz6jczvuuoXa/93UHilnxmjoMVV8ZWyJ9IbFICz4FVV9ZWyW9FiDwGfmmCnQIXQBuoBxvobxuVT2nqen57khbpPYNFRYBzoNtiPnXod3MKP0VqJxGRjmaQGQXVAf1VUz3VYOQkIbJLEdADkA3pM0v1OetKQuQ4E8gHUBXxEfDqzzC+x+MW2aL4b+eFRuu8wn9LGH9hN82dTNlrMCa02xgjf347GmdmoJ0puyu8rbrHlB2MU2QrUzYuLLJg2a6VyA7KbLsMi3Tdb9sVuwRJ+2TZrjF+b+4pTd2rkk/1hky4Z+vBapkz7lzW3Ri/ze3KpTqKTNlmYYG1TNlKmJRJpiSDxpkqq/aVKdsrLHIPU/ZFkwFUxu/dYk8M3c3ZNNjnKzsEXgmKPKxo12/G+MOOri+YslPCPXnSst2yTSEjTNkBkBcSmCd/Nu1aDF/hl15cDmdGYO26SXrtGuUs5AZT1kQrn2xIn1la6TQx1/rDT0TR9pMFxUL6fogeraJ6nBWS2k+uZQZUyauPtOO38dNNv1cltZqTzvH0WOZ49oMaqlND321yPCfSbF2ad5UXufaMFiIKLER9BqOK9Ea4m2CZEk61mrOQyYDiJjUpzFpqb5nad8olkjsfvG6RC7oIRsBsSY62SN9H6Lopd3MtyvmorcCM4gD0dkxnk7eiHARHEWg84RWkUXPinZEQeSXsCa8wOYXQqxIi31aAQN3R/rTEAv1lqCNs3taSTqoEmclmqf2FIFlCm3cGvBeBzoOt4I7vraqgJvW+awPF9B0MgJ9RRZYz+5a+75qKTEWmIstuFfm+q7RJve8ayH4LMACaxEJEaXs23AAAAABJRU5ErkJggg==
+            ) no-repeat;
+            background-size: contain;
+        }
+
+        .night {
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyNpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChNYWNpbnRvc2gpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkU2OUYzRUEwMjc4NzExRTU5RkYxQjg1Rjk2QkEyNzBEIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjhBMzA2RjA2Mjc4QTExRTU5RkYxQjg1Rjk2QkEyNzBEIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6RTY5RjNFOUUyNzg3MTFFNTlGRjFCODVGOTZCQTI3MEQiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6RTY5RjNFOUYyNzg3MTFFNTlGRjFCODVGOTZCQTI3MEQiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz4v5YACAAAC/UlEQVR42tSaXYhNURTH97kzRnJ9ZTQzPh7IMEr5yshHEwkRkSeSjweEiMjDePTkhcKLPCApUV54GxTKcDM0JfL9QE0UGdcdEmb7L3edOq5zzz1nn332Pvdfv5e5Z9Zd666711577etIKYUGjQILwRwwDOwDfcKAamP873CwBawDrcABP8ACU87/FWUgIk3gKMjL/7VfwV4sojxcCw6AL9JfD0DGdABhv0KTwAUwO+CZvaBfGFaYAJaDyyAb8Mwt0CksKFPh9W3gWgXnSSeFJTkBZXQrOM3VJUi9oJErUGoysBKcCuE86YYt58sF0MILtiakjTvCojI+i/o876Zh9ThNARysUCr99NpmAN5FTAvxBRgS0QZlK5+GDLQrOC9sOu/NADVm70LU+9RmYJOi8yLigk8sgPUxbEy0HUATH0RUNdV2AG0hd9xyarMdwNyYNhaDOpsBTI5pYwRYYTMAHYtwh80ARmqws1ShBdEWwGAdGyI4HrMYKAegawFSMdhlo5XIK/ZAfvoO5oFukxn4oNHeID5DjzUZwCvNNsn5DjDOVADPErA7BdwF0xP2v4YCyCVknDJwjxe2k8AHT4O0VTSeawD9Mll1glZN48T5IMc+N7p/7JJm1AFWg4ERna4Da8F1j62cdzZKY5RZBtbcEuYzuAlugyfgOSjwyS7LJ8QJYJoojuuX+RycLnqPlPXgLZfBalCB11iveyL7CM6K6tEZURxp/jNWGc2pzFbBp98M3peOVXrA4Sr49I+4zpdmgDSA94UZKXX+ITeNP8sFIDg9XWBoypyni0O6THzqN1bx6iXYCH6nyHnyZXOp8+UCIF0Fe1LiPH1FdoMr/q8G74DbwS9pT/TeO+Nes64JuFpNUl+5fdByT9wMHhl0vhu06L7opobqEPiWoON9oJ0v1bXf1LuMAcdAQbPjJ6g9juqPE+PXKvVcbjeAmQqHFsmb5iVwzu1tVKYSOkpdA1jEU246To4XxZ/gZLlUU5v8CbzhI+x9bqV74r7xHwEGAPDRVwnecW5KAAAAAElFTkSuQmCC
+            ) no-repeat;
+            background-size: contain;
+        }
+
+        .nav-pannel-bk {
+            position: fixed;
+            bottom: 70px;
+            height: 135px;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            /*opacity: 0.9;*/
+            /*rgba可以设置背景透明，内容不透明，而opacity的透明度会传递给里面内容*/
+            z-index: 10000;
+        }
+
+        .nav-pannel {
+            position: fixed;
+            bottom: 70px;
+            height: 135px;
+            width: 100%;
+            background: none;
+            color: #fff;
+            z-index: 10001;
+        }
+
+        .child-mod {
+            padding: 5px 10px;
+            margin: 15px;
+        }
+
+        .child-mod span {
+            display: inline-block;
+            padding-right: 20px;
+            padding-left: 10px;
+        }
+
+        .font-size-button {
+            background: none;
+            border: 1px solid #8c8c8c;
+            color: #fff;
+            border-radius: 16px;
+            padding: 5px 40px;
+        }
+
+        .child-mod button:nth-child(2) {
+            margin-right: 10px;
+        }
+
+        .bk-container {
+            position: relative;
+            width: 30px;
+            height: 30px;
+            border-radius: 15px;
+            /*background: #fff;*/
+            display: inline-block;
+            vertical-align: -14px;
+            margin-right: 7px;
+            /*opacity: 1;*/
+        }
+
+        .bk-container-current {
+            position: absolute;
+            width: 32px;
+            height: 32px;
+            border-radius: 16px;
+            border: 1px #ff7800 solid;
+            display: inline-block;
+            top: -2px;
+            left: -2px;
+        }
+
+        .bk-hide-circle {
+            display: none;
+        }
+
+        #bk1 {
+            background: #F7EEE5;
+        }
+
+        #bk2 {
+            background: #E9DFC7;
+        }
+
+        #bk3 {
+            background: #A4A4A4;
+        }
+
+        #bk4 {
+            background: #CDEFCE;
+        }
+
+        #bk5 {
+            background: #283548;
+        }
+
+        #bk6 {
+            background: #0F1410;
+        }
+
+        .artical-action-mid {
+            position: fixed;
+            z-index: 10002;
+            width: 100%;
+            height: 40%;
+            top: 30%;
+        }
+
+    </style>
+</head>
+<body>
+<div id="root" class="container">
+    <div class="m-artical-action">
+        <div class="artical-action-mid" id="action-mid"></div>
+    </div>
+    <div id="top-nav" class="top-nav" style="display: none;">
+        <div class="icon-back"></div>
+        <div class="nav-title">返回书架</div>
+    </div>
+    <div id="fiction_chapter_title"></div>
+    <div id="fiction_container" class="m-read-content">
+<!--
+        <h4>平凡的世界</h4>
+        <p>
+            １９７５年二、三月间，一个平平常常的日子，细蒙蒙的雨丝夹着一星半点的雪花，正纷纷淋淋地向大地飘洒着。时令已快到惊蛰，雪当然再不会存留，往往还没等落地，就已经消失得无踪无影了。黄土高原严寒而漫长的冬天看来就要过去，但那真正温暖的春天还远远地没有到来。 </p>
+        <p>
+            在这样雨雪交加的日子里，如果没有什么紧要事，人们宁愿一整天足不出户。因此，县城的大街小巷倒也比平时少了许多嘈杂。街巷背阴的地方。冬天残留的积雪和冰溜子正在雨点的敲击下蚀化，石板街上到处都漫流着肮脏的污水。风依然是寒冷的。空荡荡的街道上，有时会偶尔走过来一个乡下人，破毡帽护着脑门，胳膊上挽一筐子土豆或萝卜，有气无力地呼唤着买主。唉，城市在这样的日子里完全丧失了生气，变得没有一点可爱之处了。
+        </p>
+        <p>
+            只有在半山腰县立高中的大院坝里，此刻却自有一番热闹景象。午饭铃声刚刚响过，从一排排高低错落的石窑洞里，就跑出来了一群一伙的男男女女。他们把碗筷敲得震天价响，踏泥带水、叫叫嚷嚷地跑过院坝，向南面总务处那一排窑洞的墙根下蜂涌而去。偌大一个院子，霎时就被这纷乱的人群踩踏成了一片烂泥滩。与此同时，那些家在本城的走读生们，也正三三两两涌出东面学校的大门。他们撑着雨伞，一路说说笑笑，通过一段早年间用横石片插起的长长的下坡路，不多时便纷纷消失在城市的大街小巷中。 </p>
+        <p>
+            在校园内的南墙根下，现在已经按班级排起了十几路纵队。各班的值日生正在忙碌地给众人分饭菜。每个人的饭菜都是昨天登记好并付了饭票的，因此程序并不复杂，现在值日生只是按饭表付给每人预订的一份。菜分甲、乙、丙三等。甲菜以土豆、白菜、粉条为主，里面有些叫人嘴馋的大肉片，每份三毛钱；乙菜其它内容和甲菜一样，只是没有肉，每份一毛五分钱。丙菜可就差远了，清水煮白萝卜——似乎只是为了掩饰这过分的清淡，才在里面象征性地漂了几点辣子油花。不过，这菜价钱倒也便宜，每份五分钱。 </p>
+        <p>
+            各班的甲菜只是在小脸盆里盛一点，看来吃得起肉菜的学生没有几个。丙菜也用小脸盆盛一点，说明吃这种下等伙食的人也没有多少。只有乙菜各班都用烧瓷大脚盆盛着，海海漫漫的，显然大部分人都吃这种既不奢侈也不寒酸的菜。主食也分三等：白面馍，玉米面馍，高粱面馍；白、黄、黑，颜色就表明了一种差别；学生们戏称欧洲、亚洲、非洲。
+        </p>
+-->
+    </div>
+
+    <div class="m-button-bar">
+        <ul class="u-tab">
+            <li id="prev_button">上一章</li>
+            <li id="next_button">下一章</li>
+        </ul>
+    </div>
+    <div class="nav-pannel-bk font-container" style="display:none;">
+        <div class="nav-pannel" id="font-container">
+            <div class="child-mod">
+                <span>字号</span>
+                <button id="large-font" class="font-size-button">大</button>
+                <button id="small-font" class="font-size-button">小</button>
+            </div>
+            <div class="child-mod">
+                <span>背景</span>
+                <div class="bk-container" id="bk1">
+                    <div class="bk-hide-circle bk-container-current"></div>
+                </div>
+                <div class="bk-container" id="bk2">
+                    <div class="bk-container-current"></div>
+                </div>
+                <div class="bk-container" id="bk3">
+                    <div class="bk-hide-circle bk-container-current"></div>
+                </div>
+                <div class="bk-container" id="bk4">
+                    <div class="bk-hide-circle bk-container-current"></div>
+                </div>
+                <div class="bk-container" id="bk5">
+                    <div class="bk-hide-circle bk-container-current"></div>
+                </div>
+                <div class="bk-container" id="bk6">
+                    <div class="bk-hide-circle bk-container-current"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="bottom-nav-bk bottom_nav" style="display:none;">
+        <div class="contents_box">
+            <div class="contents" id="contents-button"></div>
+            <div class="char">目录</div>
+        </div>
+        <div class="font_box">
+            <div class="font" id="font-button"></div>
+            <div class="char">字体</div>
+        </div>
+        <div class="day_box">
+            <div class="night" id="night-button"></div>
+            <div class="char" id="day-night">夜间</div>
+        </div>
+    </div>
+</div>
+<script src="lib/zepto.min.js"></script>
+<script>
+    //    这个项目里的jsonp插件之前给jquery开发的，jsonp插件依赖于jquery，但是为了让他在zepto下也能使用 所以这么做的，这么做有一个背景就是jquery和zepto的接口是高度一致的
+    window.jQuery = $;
+</script>
+<script src="js/jquery.base64.js"></script>
+<script src="js/jquery.jsonp.js"></script>
+
+<script>
+    (function () {//在闭包的最开始进行声明以后可以运用ES6的语法
+//        'use strict'
+        var Util = (function () {
+            //localStorage在同一域名下是共享的，为了防止其他人误操作localStorage，因此要将其进行封装，在key前加上前缀
+            var prefix = 'html5_reader_';
+            var StorageGetter = function (key) {
+                return localStorage.getItem(prefix + key);
+            };
+            var StorageSetter = function (key, val) {
+                return localStorage.setItem(prefix + key, val);
+            };
+            //数据解密
+            var getBSONP = function (url, callback) {
+                return $.jsonp({
+                    url: url,
+                    cache: true,
+                    callback: 'duokan_fiction_chapter',
+                    success: function (result) {
+                        //debugger
+                        var data = $.base64.decode(result);
+                        var json = decodeURIComponent(escape(data));//将http的URI编码做解码操作
+                        callback(json);
+                    }
+                });
+            };
+            return {
+                getBSONP: getBSONP,
+                StorageGetter: StorageGetter,
+                StorageSetter: StorageSetter
+            }
+        })();
+
+        //点击中间时显示上下菜单,提前引用
+        var Dom = {
+            top_nav: $('#top-nav'),
+            bottom_nav: $('.bottom_nav'),
+            night_day_switch_button: $('#night-button'),
+            font_container: $('.font-container'),
+            font_button: $('#font-button'),
+            body_bk: $('body')
+        };
+        //背景切换，提前引用
+        var bkChange = $('.bk-container');
+
+        //屏幕滚动时使上下菜单消失，提前引用
+        var Win = $(window);
+        var Doc = $(document);
+        var readerModel;
+        var readerUI;
+
+        //localStorage保存的字号
+        var RootContainer = $('#fiction_container');
+//        var initFontSize = 14;
+        var initFontSize = Util.StorageGetter('font-size');
+        initFontSize = parseInt(initFontSize);
+        if (!initFontSize) {
+            initFontSize = 14;
+        }
+        RootContainer.css('font-size', initFontSize);
+//        以上还可以这样写var initFontsize=parseInt(Util.StorageGetter("font_size"))||14;或者var initFontSize=null? 14:parseInt(Util.StorageGetter('font-size'));
+
+
+        //localStorage保存的背景颜色
+        var RootBackgroundColor = $('body');
+        var initBackgroundColor = Util.StorageGetter('background');
+//        initBackgroundColor = String(initBackgroundColor);
+        if (!initBackgroundColor) {
+            RootBackgroundColor.css('background', '#E9DFC7');
+//            RootBackgroundColor.css('background',initBackgroundColor);
+        }
+        RootBackgroundColor.css('background', initBackgroundColor);
+
+/*
+        //localStorage保存的文章内容
+        var RootContentTitle = $('#contentTitle');
+        var RootContentInner = $('#contentInner');
+        var initContentTitle = Util.StorageGetter(RootContentTitle);
+        var initContentInner = Util.StorageGetter(RootContentInner);
+        if (!initContentTitle && !initContentInner) {
+            RootContentTitle.html();
+            RootContentInner.html();
+        }
+        RootContentTitle.html(initContentTitle);
+        RootContentInner.html(initContentInner);
+*/
+
+
+        function main() {
+            //todo 整个项目的入口函数
+            readerModel = ReaderModel();
+            readerUI = ReaderBaseFrame(RootContainer);
+            readerModel.init(function(data){
+                readerUI(data);
+            });
+            EventHanlder();
+        }
+
+        //模型(Model)
+        function ReaderModel() {
+            //todo 实现和阅读器相关的数据交互的方法
+            var Chapter_id;
+            var ChapterTotal;
+            var init = function (UIcallback) {
+                //初始化文字内容
+                getFictionInfo(function () {
+                    getCurChapterContent(Chapter_id, function (data) {
+                        //todo
+                        UIcallback && UIcallback(data);//这个是一种代码健壮性的保护机制 当声明了UIcallback才会执行UIcallback 相当于if(UIcallback) {UIcallback(data)}简写
+                        //&& 属于布尔值逻辑判断，  False and True ，判断为Faslse。这里面有一个特性，当第一个值为False的时候，就不会去判断第二个值了，而是直接返回False，只有第一值为true的时候，才会继续判断第二个值,所以这里的 callback && callback() 的意思就是，如果第一值callback不存在（false），直接返回false，如果第一个值存在，则运行第二个值 callback()
+                    });
+                });
+
+/*
+                //以上部分代码用ES6的Promise来实现
+                getFictionInfoPromise().then(function(d){
+                    return getCurChapterContentPromise();
+                }).then(function(data){
+                    UIcallback && UIcallback(data);
+                });
+*/
+            };
+
+            var getFictionInfo = function (callback) {
+                //todo 获取章节信息
+                $.get('data/chapter.json', function (data) {
+                    //todo 获得章节信息之后的回调
+                    Chapter_id = Util.StorageGetter('last_chapter_id');
+                    if(Chapter_id == null){
+                        Chapter_id = data.chapters[1].chapter_id;
+                    }
+                    ChapterTotal = data.chapters.length;
+                    callback && callback();
+                },'json');
+            };
+
+/*
+            //以上部分代码用ES6的Promise来实现
+            var getFictionInfoPromise = function(){
+                return new Promise(function(resolve,reject){
+                    $.get('data/chapter.json', function (data) {
+                        //todo 获得章节信息之后的回调
+                        if(data.result == 0){
+                            Chapter_id = Util.StorageGetter('last_chapter_id');
+                            if(Chapter_id == null){
+                                Chapter_id = data.chapters[1].chapter_id;
+                            }
+                            ChapterTotal = data.chapters.length;
+                            resolve();
+                        } else{
+                            reject();
+                        }
+                    },'json');
+
+                });
+            }
+*/
+            var getCurChapterContent = function (chapter_id,callback) {
+                //todo 获取章节内容，获取到的为base64格式的数据
+                $.get('data/data' + chapter_id + '.json', function (data) {
+                    if (data.result == 0) {
+                        var url = data.jsonp;
+                        Util.getBSONP(url, function (data) {
+                            //todo 将上面获取到的base64格式的数据解码为可阅读的文字内容
+//                            debugger;
+                            callback && callback(data);//相当于if(callback){ callback() }，目的是代码健壮性的提升，防治不声明callback就运行导致的报错
+                        });
+                    }
+                },'json');
+            };
+/*
+            var getCurChapterContentPromise = function(){
+                return new Promise(function(resolve,reject){
+                    $.get('data/data' + Chapter_id + '.json', function (data) {
+                        if (data.result == 0) {
+                            var url = data.jsonp;
+                            Util.getBSONP(url, function (data) {
+                                resolve(data);
+                            });
+                        }else{
+                            reject({msg:'fail'});
+                        }
+                    },'json');
+
+                });
+            }
+*/
+            var prevChapter = function (UIcallback) {
+                //todo 切换上一章
+                Chapter_id = parseInt(Chapter_id,10);
+                if(Chapter_id == 0){
+                    return;
+                }
+                Chapter_id -= 1;
+                getCurChapterContent(Chapter_id,UIcallback);
+                Util.StorageSetter('last_chapter_id',Chapter_id);
+            };
+            var nextChapter = function (UIcallback) {
+                //todo 切换下一章
+                Chapter_id = parseInt(Chapter_id,10);
+                if(Chapter_id == ChapterTotal){
+                    return;
+                }
+                Chapter_id += 1;
+                getCurChapterContent(Chapter_id,UIcallback);
+                Util.StorageSetter('last_chapter_id',Chapter_id);
+            };
+            return {
+                init: init,
+                prevChapter : prevChapter,
+                nextChapter : nextChapter
+            }
+        };
+
+        //视图(View)
+        function ReaderBaseFrame(container) {
+            //todo 渲染基本的UI结构
+            function parseChapterData(jsonData){
+//                debugger;
+                var jsonObj = JSON.parse(jsonData);
+                var html = '<h4 id="contentTitle">' + jsonObj.t + '</h4>';//章节的标题
+                for(var i =0;i<jsonObj.p.length;i++){
+                    html += '<p id="contentInner">' + jsonObj.p[i] + '</p>';//章节的内容
+                }
+                return html;
+            }
+            return function (data){
+                container.html(parseChapterData(data));//将章节内容填充到容器
+            }
+        }
+
+        //控制(Control)
+        function EventHanlder() {
+            //todo 交互的事件绑定
+            //touch 如果绑定事件用touch，那么要同时设置touchstart和touchend，代码不精简
+            //zepto的tap模拟用户点击和轻触
+            //Android4.0之前click响应时间click有300毫秒延迟，4.0之后click和tap响应时间差不多
+            //click tap 两种绑定事件不需要考虑start和end，所以基于代码的强壮性来看，绑定事件用click或tap更合适
+            $('#action-mid').click(function () {
+                //todo 呼出上下菜单栏
+                if (Dom.top_nav.css('display') == 'none') {
+                    Dom.bottom_nav.show();
+                    Dom.top_nav.show();
+                } else {
+                    Dom.bottom_nav.hide();
+                    Dom.top_nav.hide();
+                    Dom.font_container.hide();
+                    Dom.font_button.removeClass('current');
+                }
+            });
+
+            Dom.font_button.click(function () {
+                //todo 呼出字体和背景调节面板
+                if (Dom.font_container.css('display') == 'none') {
+                    Dom.font_container.show();
+                    Dom.font_button.addClass('current').removeClass('icon-font');
+                } else {
+                    Dom.font_container.hide();
+                    Dom.font_button.removeClass('current').addClass('icon-font');
+                }
+            });
+
+            Dom.night_day_switch_button.click(function () {
+                //todo 触发白天和夜间背景切换的事件
+                Dom.night_day_switch_button.toggleClass('day');
+                Dom.night_day_switch_button.toggleClass('night');
+                if (Dom.night_day_switch_button.hasClass('day')) {
+                    Dom.body_bk.css('background', "#F7EEE5");
+                    $('#day-night').html('白天');
+                    $('#bk1').children().removeClass('bk-hide-circle');
+                    $('#bk1').siblings().children().addClass('bk-hide-circle');
+                } else if (Dom.night_day_switch_button.hasClass('night')) {
+                    Dom.body_bk.css('background', "#0F1410");
+                    $('#day-night').html('夜间');
+                    $('#bk6').children().removeClass('bk-hide-circle');
+                    $('#bk6').siblings().children().addClass('bk-hide-circle');
+                }
+                // var classes
+                //  classes = Dom.night_day_switch_button.hasClass('day')? 'night':"day";
+                //  console.log(classes)
+                // Dom.night_day_switch_button.addClass(classes);
+                // var color
+                // color = Dom.night_day_switch_button.hasClass('day')? "#000":'#fff';
+                //  Dom.body_bk.css('background',color);
+                // if(Dom.body_bk.css('background')!='#fff'){
+                //     Dom.night_day_switch_button.addClass('day').removeClass('night');
+                //     Dom.body_bk.css('background','#000');
+                // }else {
+                //     Dom.night_day_switch_button.addClass('night').removeClass('day');
+                //     Dom.body_bk.css('background','#fff');
+                // }
+            });
+
+            bkChange.each(function (i) {
+                //todo 背景切换按钮的点击事件
+                $(this).click(function (i) {
+                    if ($(this).children().hasClass('bk-hide-circle')) {
+                        $(this).children().removeClass('bk-hide-circle');
+                        $(this).siblings().children().addClass('bk-hide-circle');
+                        Dom.body_bk.css('background', $(this).css('background'));
+
+                        //将当前背景色保存到localStorage
+                        var bkRgb = $(this).css('background');
+                        initBackgroundColor = bkRgb;
+                        RootBackgroundColor.css('background', initBackgroundColor);
+                        Util.StorageSetter('background', initBackgroundColor);
+                    }
+                })
+            });
+
+            $('#large-font').click(function () {
+                //todo 字体变大
+                if (initFontSize > 20) {
+                    return;
+                }
+                initFontSize += 1;
+                RootContainer.css('font-size', initFontSize);
+                Util.StorageSetter('font-size', initFontSize);
+
+            });
+            $('#small-font').click(function () {
+                //todo 字体变小
+                if (initFontSize < 12) {
+                    return;
+                }
+                initFontSize -= 1;
+                RootContainer.css('font-size', initFontSize);
+                Util.StorageSetter('font-size', initFontSize);
+
+            });
+
+            Win.scroll(function () {
+                //todo 屏幕滚动时上下菜单栏消失
+                Dom.bottom_nav.hide();
+                Dom.top_nav.hide();
+                Dom.font_container.hide();
+                Dom.font_button.removeClass('current');
+            });
+            
+            $('#prev_button').click(function () {
+                //todo 获得章节的翻页数据->把数据拿出来渲染
+                readerModel.prevChapter(function (data){
+                    readerUI(data);
+                });
+            });
+
+            $('#next_button').click(function () {
+                readerModel.nextChapter(function (data) {
+                    readerUI(data);
+                });
+
+            });
+        }
+
+        main();
+    })();
+
+</script>
+</body>
+</html>

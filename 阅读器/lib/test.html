@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    div {
+        width: 220px;
+        height: 300px;
+        position: fixed;
+    }
+
+    #div1 {
+        background: rgba(0, 0, 0, 0.5);
+        /*opacity: 0.5;*/
+        z-index: 10;
+    }
+
+    #div2 {
+        z-index: 11;
+        color: rgba(0, 203, 255, 1);
+        color: #00CBFF;
+    }
+</style>
+<body>
+<div id="div1">
+    <div id="div2">
+        <p> 我是测试文字</p>
+    </div>
+</div>
+</body>
+</html>

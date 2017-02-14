@@ -1,0 +1,11 @@
+@import "../movie/movie-template.wxss";
+
+/*flex对于scroll-view没有效果，此处用左浮动*/
+.single-view-container{
+    float: left;
+    margin-bottom: 40rpx;
+}
+.grid-container{   
+    height: 1300rpx;/*上滑加载必须设定一个高度*/
+    margin:40rpx 0 40rpx 6rpx;
+}

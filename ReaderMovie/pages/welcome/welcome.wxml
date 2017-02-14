@@ -1,0 +1,11 @@
+<!--wxml是编写小程序骨架的文件-->
+<!--<div>-->
+<view class="container">
+    <image class="user-hewie" src="/images/avatar/4.png"></image>
+    <!--只有text包围起来的文字才可以长按选中-->
+    <text class="user-name"><text style="color:red">Hello</text>,Hewie</text>
+    <!--绑定事件之前必须加bindbind-->
+    <view class="moto-container" bindtap="onTap">
+        <text class="moto">立即体验</text>
+    </view>
+</view>
